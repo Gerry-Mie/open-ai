@@ -8,6 +8,7 @@ const DallE = () => {
 
     async function generate(e: FormEvent<HTMLFormElement>) {
         e.preventDefault()
+        if (status==='loading') return;
         setStatus('loading')
         try {
             const prompt: string = e.currentTarget.prompt.value;
@@ -16,6 +17,7 @@ const DallE = () => {
             setImage(res.data)
             setStatus('')
         }catch (e){
+            console.log(e)
             setStatus('error')
         }
     }
@@ -30,7 +32,7 @@ const DallE = () => {
                 </form>
                 <h1 className='py-5'>{status==='loading'?'generating...':status=='error'?'error':''}</h1>
                 {image&&(
-                    <img width={512} src={image} height={512} alt='image'/>
+                    <img  width={512} src={image} height={512} alt='image'/>
                 )}
             </div>
 
